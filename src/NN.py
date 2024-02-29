@@ -8,7 +8,7 @@ class SequentialNN(nn.Module):
     
     Attributes
     ----------
-    topology : list
+    topology : torch.nn.Sequential
         PyTorch Sequential module with linear layers (each one with its activation functions)
     '''
     
