@@ -1,4 +1,30 @@
 import torch.optim as optim
+import torch.utils.data as torch_data
+
+class TrainDataset(torch_data.Dataset):
+    '''
+        Dataset module to use for PyTorch DataLoader
+    
+        Attributes
+        ----------
+        data : torch.nn.Tensor
+            The input of the training examples
+
+        labels : torch.nn.Tensor
+            The labels of the training examples
+    '''
+    
+    def __init__(self, data, labels):
+        self.data = data
+        self.labels = labels
+    
+    def __len__(self):
+        return len(self.data)
+    
+    def __getitem__(self, index):
+        return self.data[index], self.labels[index]
+
+
 
 class Training:
     def __init__(self, net):
@@ -7,10 +33,10 @@ class Training:
     
         Attributes
         ----------
-        nn : torch.nn.Module neural network
+        nn : torch.nn.Module
             PyTorch Sequential module with linear layers (each one with its activation functions)
 
-        optim: torch.optim
+        optim : torch.optim
             PyTorch optimizer, can be SGD or Adamax
         
         lr_scheduler: torch.lr_scheduler.LinearLR
